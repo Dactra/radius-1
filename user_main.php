@@ -89,9 +89,9 @@ $menu = "user";
             $check = get_group_user($data['username']);
             foreach ($groupname as $key => $value) {
               if($check == $value){
-                echo '<option selected>'.$value.'</option>';
+                echo '<option selected value="'.$value.'">'.$value.'</option>';
               }else{
-             echo '<option>'.$value.'</option>';
+             echo '<option value="'.$value.'">'.$value.'</option>';
              }
             }
             ?>

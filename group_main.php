@@ -52,7 +52,7 @@ $menu = "group";
 <!--- edit -->
  <?php if($_GET['id'] != ""){ 
 
-  $result = mysqli_query($con,"SELECT * FROM radgroupcheck WHERE id = '".$_GET['id']."'");
+  $result = mysqli_query($con,"SELECT * FROM radgroupreply WHERE id = '".$_GET['id']."'");
   $data = mysqli_fetch_assoc($result);
 
 
@@ -78,8 +78,12 @@ $menu = "group";
   </form>
 <?php } ?>
 
+<hr>
 
-
+<pre>
+    Mikrotik-Rate-Limit   format upload[M]/download[M]
+    WISPr-Redirection-URL format Http://xxxx.xxxx
+</pre>
 
 <!-- table data -->
  <br>
@@ -99,7 +103,7 @@ $menu = "group";
     </thead>
     <tbody>
       <?php 
-      $result = mysqli_query($con,'SELECT * FROM radgroupcheck');
+      $result = mysqli_query($con,'SELECT * FROM radgroupreply');
        while($data = mysqli_fetch_assoc($result)){
         ?>
        

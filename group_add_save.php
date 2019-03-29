@@ -2,13 +2,14 @@
 include("connect.php");
 
 //var_dump($_POST['data']);
+//exit();
 $_POST['data']['op'] = ":=";
 foreach ($_POST['data'] as $key => $value) {
 	$colunm[] = "`".$key."`";
 	$data[]	= "'".$value."'";
 }
 
-$sql = "INSERT INTO radgroupcheck (".implode(",", $colunm).") VALUES (".implode(",", $data).")";
+$sql = "INSERT INTO radgroupreply (".implode(",", $colunm).") VALUES (".implode(",", $data).")";
 
 $result = mysqli_query($con,$sql);
 

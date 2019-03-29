@@ -1,5 +1,7 @@
 <?php 
 include("connect.php");
+//var_dump($_POST);
+//exit();
 
 if($_POST['username'] == "" || $_POST['password'] == ""){
 	echo '<META HTTP-EQUIV="Refresh" CONTENT="0;URL=user_main.php">';
@@ -20,7 +22,7 @@ $sql_radusergroup = "INSERT INTO radusergroup (username,groupname,priority) VALU
 
 
 $result_radusergroup = mysqli_query($con,$sql_radusergroup);
-if(!$result_radcheck){
+if(!$result_radusergroup){
 	echo("Error  sql_radusergroup: " . mysqli_error($con));
 	exit();
 }

@@ -13,7 +13,7 @@ foreach ($_POST['data'] as $key => $value) {
 	$update[] =  "`".$key."` = "."'".$value."'";
 }
 
-$sql = "UPDATE radgroupcheck SET ".implode(",", $update)." WHERE  id = '".$_POST['id']."'";
+$sql = "UPDATE radgroupreply SET ".implode(",", $update)." WHERE  id = '".$_POST['id']."'";
 //echo $sql;
 //exit();
 

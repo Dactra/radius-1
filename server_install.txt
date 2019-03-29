@@ -1,0 +1,86 @@
+Ubuntu 14.04 64bit
+cpu 1 core
+ram 1 GB
+HDD 25 GB
+----------------------
+#Install nginx
+
+sudo apt update
+sudo apt install nginx -y
+
+
+#ตั้งค่า firewall ให้เปิด port การทำงาน nginx
+
+sudo ufw allow 'Nginx HTTP'
+
+----------------------
+#Install mysql-server
+
+sudo apt install mysql-server
+
+#run setup 
+
+mysql_secure_installation
+
+#1. Enter current passowrd for root (enter for none):
+ENTER
+
+#2. Set root password [Y/N]
+Y
+
+#3. Set password root sql 
+
+#4. Remove anonymous? [Y/N]
+Y
+
+#5 Disallow root login remotely? [Y/N]
+Y = จะเข้าจากภายนอกไม่ได้ 
+N = จะสามารถเข้าจากภายนอกได้
+
+N
+
+#5.Remove test database and access to it? [Y/N]
+Y
+
+#6.Reload privilege table Now ? [Y/N]
+Y
+
+#Test sql 
+mysql -u root -p 
+
+-------------------------
+#Install php 
+
+sudo apt install php-fpm php-mysql
+
+#Edit file /etc/php/7.x/fpm/php.ini
+
+cgi.fix_pathinfo=0
+date.timezone ="Asia/Bangkok"
+
+#restart php 
+/etc/init.d/php7.x-fpm restart
+-------------------------
+#Configure Nginx to Use the PHP Processor
+#edit /etc/nginx/sites-available/default
+
+index index.php index.html index.htm index.nginx-debian.html;
+
+location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    }
+
+#check config fite 
+nginx -t
+
+#restart nginx
+. /etc/init.d/nginx restart
+
+#ทดสอบ สร้างไฟล์ 
+nano /var/www/html/info.php 
+<?php phpinfo();?>
+----------------------------
+
+
+

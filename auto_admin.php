@@ -51,7 +51,7 @@ $alter2 = mysqli_query($con,"ALTER TABLE `admin`
 	exit();
 }
 
-
+mysqli_query($con,"ALTER TABLE `radusergroup` ADD UNIQUE(`username`);");
 
 
 

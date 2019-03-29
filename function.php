@@ -16,7 +16,7 @@ function get_group_user($username){
 function data_groupname(){
 	global $con;
 
-	$result = mysqli_query($con,"SELECT DISTINCT groupname FROM radgroupcheck ");
+	$result = mysqli_query($con,"SELECT DISTINCT groupname FROM radgroupreply ");
 	while ($data = mysqli_fetch_assoc($result)) {
 		$d[] = $data['groupname'];
 	}
@@ -35,7 +35,7 @@ function count_user(){
 function count_groupname(){
 	global $con;
 
-	$result = mysqli_query($con,"SELECT DISTINCT groupname FROM radgroupcheck ");
+	$result = mysqli_query($con,"SELECT DISTINCT groupname FROM radgroupreply ");
 	return mysqli_num_rows($result);
 }
 ?>
