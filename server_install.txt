@@ -81,6 +81,95 @@ nginx -t
 nano /var/www/html/info.php 
 <?php phpinfo();?>
 ----------------------------
+#install phpmyadmin
+
+sudo apt-get update
+sudo apt-get install phpmyadmin
+
+#Screen 1 is > Tap > Enter
+#Seting password root > Yes 
+
+sudo ln -s /usr/share/phpmyadmin /var/www/html
+
+#set password
+
+sudo mysql 
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+----------------------------
+#install freeradius
+
+sudo apt update
+sudo apt remove openjdk-8-jre-headless openjdk-8-jre -y
+sudo apt-get install ca-certificates-java -y
+sudo apt install freeradius -y
+sudo apt-get install freeradius-mysql -y
+
+#create database radius
+mysql -u root -p
+create database radius;
+#import sql 
+mysql -u root -p radius < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql
+#config 
+ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/
+
+#Edit file /etc/freeradius/3.0/mods-enabled/sql
+driver = "rlm_sql_mysql"
+dialect = "mysql"
+login = radius 
+password = password
+readclients = yes
+read_clients=yes
+
+sudo chgrp -h freerad /etc/freeradius/3.0/mods-available/sql
+sudo chown -R freerad:freerad /etc/freeradius/3.0/mods-enabled/sql
+
+/etc/init.d/freeradius restart
+
+#test radius server
+mysql -u root -p
+ use radius;
+ INSERT INTO radcheck (username, attribute, op ,value) VALUES ('1150', 'Cleartext-Password',':=', '1150');
+#check user
+select * from radcheck;
+ #check authen radius
+radtest 1150 1150  127.0.0.1  18128 testing123
+
+#set clients
+sudo nano /etc/freeradius/3.0/clients.conf
+
+ท้าย File
+client mikrotik-lab1 {
+       ipaddr          = 0.0.0.0/0
+       secret          = 12345678
+}
+
+*** 0.0.0.0/0 เข้าใช้ได้ทุก ip
+
+
+----------------------------
+#install git
+
+apt-get update
+apt-get install git-core
+
+----------------------------
+#install  system authen 
+
+cd /var/www/html/
+git clone https://github.com/kimhun55/radius
+
+#set system authen 
+cd radius/
+nano setting.php
+#set connect mysql 
+$username = “admin”;
+$password = “password”;
+$db_name = “radius”;
+
+
+
+
+
 
 
 
