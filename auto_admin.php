@@ -28,7 +28,7 @@ if(!$create){
 
 
 $insert = mysqli_query($con,"INSERT INTO `admin` (`admin_id`, `username`, `password`, `name`, `tel`, `email`, `position`, `add_datetime`) VALUES
-(1, 'kimhun55', 'Kim0815575706', 'kimhun55', '0815575706', 'kimhun55@gmail.com', 'admin', '2019-03-27 00:00:00')");
+(1, 'admin', 'admin', 'kimhun55', '0815575706', 'kimhun55@gmail.com', 'admin', '2019-03-27 00:00:00')");
  if(!$insert){
 	echo("Error insert : " . mysqli_error($con));
 	exit();
